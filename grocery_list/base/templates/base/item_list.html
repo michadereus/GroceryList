@@ -1,0 +1,51 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+<div class="header-bar">
+    <div>
+        <h1>Hello {{request.user|title}}</h1>
+        <h3 style="margin:0">Items left: {{count}}</h3>
+    </div>
+</div>
+
+<!-- <p>{{request.user}}</p> -->
+<!-- <a href="{% url 'logout' %}">Logout</a> -->
+{% if not request.user.is_authenticated %}
+<a href="{% url 'login' %}">Login</a>
+{% endif %}
+
+<!-- <hr> -->
+<!-- <h1>Grocery List</h1> -->
+
+<a id="add-link" href="{% url 'item-create' %}">&#x2b;</a>
+
+<div class="items-item-wrapper">
+    {% for item in items %}
+        <div class="item-wrapper">
+            {% if item.in_basket %}
+                <div class="item-title">
+                    <div class="item-in-basket-icon"></div>
+                    <i><s><a href="{% url 'item-update' item.item_num %}">{{item}}</a></s></i>
+                </div> 
+                <a class="delete-link" href="{% url 'item-delete' item.item_num %}">&#215;</a>
+
+            {% else %}
+                <div class="item-title">
+                    <div class="item-not-in-basket-icon"></div>
+                    <a href="{% url 'item-update' item.item_num %}">{{item}}</a>
+                </div>
+                <!-- <a action="" class="button" href="{% url 'items' %}">{{item.in_basket}}</a> -->
+
+                <a class="delete-link" href="{% url 'item-delete' item.item_num %}">&#215;</a>
+            {% endif %}
+        </div>
+    {% empty %}
+    {% endfor %}
+
+</div>
+<div class="header-bar">
+    <a href="{% url 'logout' %}">&#10096;&#9866; Logout</a>
+</div>
+
+
+{% endblock content %}

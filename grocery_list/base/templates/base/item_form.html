@@ -1,0 +1,20 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+<div class="header-bar">
+    <h2>{{item}}</h2>
+</div>
+ 
+
+<!-- <a href="{% url 'items' %}">Back</a> -->
+<div class="card-body">
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input class="button" type="submit" value="Submit">
+    </form>
+</div>
+<div class="header-bar">
+    <a href="{% url 'items' %}">&#10096;&#9866; Back</a>
+</div>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+<div class="header-bar">
+    <h2>Delete Item</h2>
+    <a href="{% url 'items' %}">&#10096;&#9866; Back</a>
+</div>
+
+<div class="card-body">
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <p>Are you sure you want to remove "{{item}}"?</p>
+        <input class="button" value="Delete" type="submit"/>
+    </form>
+</div>
+{% endblock content %}
